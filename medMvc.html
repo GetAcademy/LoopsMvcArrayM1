@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // model
+        let displayText = '';
+        let isUpperCase = true;
+
+        // view 
+        updateView();
+        function updateView() {
+            let alphabet = 'ABCDEFGHIJKLMOPQRSTUVWXYZÆØÅ';
+            let html = '';            
+            for (let index = 0; index < alphabet.length; index++) {
+                let character = alphabet.charAt(index);
+                if(!isUpperCase){
+                    character = character.toLowerCase();
+                }
+                html += /*HTML*/`
+                    <button onclick="addCharacter('${character}')">
+                        ${character}
+                    </button>`;               
+            }
+            let appDiv = document.getElementById('app');
+
+
+            appDiv.innerHTML = /*HTML*/`
+                <div>${displayText}</div>
+                ${html}
+                <button onclick="toggleCase()">${isUpperCase ? '⇓':'⇑'}</button>
+            `;
+        }
+
+        /*
+            let symbol;
+            if(isUpperCase){
+                symbol = '⇑';
+            }else {
+                symbol = '⇓';
+            }
+        */
+
+        // controller
+        function addCharacter(character) {
+            displayText += character;
+            updateView();
+        }
+
+        function toggleCase(){
+            isUpperCase = !isUpperCase;
+            updateView();
+        }
+
+    </script>
+
+    <!--
+
+        Pause til 11:06
+
+        2: repetere MVC 
+         - gjør det samme via en modell
+         - bokstav-tastatur
+         - shift-tast - store og små bokstaver
+         - (ev. slettetast)
+        3: intro til index og arrays 
+         - ord-tastatur
+         - fjerne ord
+         - flytte ord
+
+        DRY: Don't repeat yourself
+
+    -->
+</body>
+
+</html>

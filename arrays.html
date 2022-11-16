@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // model
+        let displayText = '';
+        let lengthOfLast = 0;
+
+        // view 
+        updateView();
+        function updateView() {
+            let alphabet = ['A','B','C','D','E','F','G',
+            'H','I','J','K','L','M','O','P','Q','R','S',
+            'T','U','V','W','X','Y','Z','Æ','Ø','Å',
+            'Hei', 'Ha det', 'Takk'];
+            let html = '';            
+            for (let index = 0; index < alphabet.length; index++) {
+                let txt = alphabet[index];
+                html += /*HTML*/`
+                    <button onclick="addText('${txt}')">
+                        ${txt}
+                    </button>`;               
+            }
+            let appDiv = document.getElementById('app');
+
+
+            appDiv.innerHTML = /*HTML*/`
+                <div>${displayText}</div>
+                ${html}
+                <button onclick="remove()">⇐</button>
+                <button onclick="addEnter()">ENTER</button>
+            `;
+        }
+
+        // controller
+        function addText(txt) {
+            displayText += txt;
+            lengthOfLast = txt.length;
+            updateView();            
+        }
+
+        function addEnter(){
+            addText('<br/>');
+        }
+
+        function remove(){
+            displayText = displayText.substr(0, displayText.length - lengthOfLast);
+            updateView();   
+        }
+
+    </script>
+
+    <!--
+
+        2: repetere MVC 
+         - gjør det samme via en modell
+         - bokstav-tastatur
+         - shift-tast - store og små bokstaver
+         - (ev. slettetast)
+        3: intro til index og arrays 
+         - ord-tastatur
+         - fjerne ord
+         - flytte ord
+
+        DRY: Don't repeat yourself
+
+    -->
+</body>
+
+</html>
